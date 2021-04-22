@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.imagapplication.Dru.loadImageCircle
 import com.example.imagapplication.Dru.selectImage
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +26,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btUploadImage.setOnClickListener {
-            Dru.uploadImage(baseContext, "123456.jpg", mImageUri) {
+            val imageName = UUID.randomUUID().toString().replace("-", "") + ".jpg"
+            val baseUrl = "https://easyfix204.000webhostapp.com/image/"
+            val imagePath = baseUrl + imageName
+            Log.d(TAG, "onCreate: ${imagePath}")
+            Dru.uploadImage(baseContext, baseUrl, imageName, mImageUri) {
                 Toast.makeText(baseContext, "${it?.response}", Toast.LENGTH_SHORT).show()
             }
         }

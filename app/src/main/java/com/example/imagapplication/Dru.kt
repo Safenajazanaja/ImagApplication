@@ -29,6 +29,7 @@ object Dru {
 
     fun uploadImage(
         context: Context,
+        baseUrl: String,
         imageName: String,
         uri: Uri?,
         listener: (UploadImageResponse?) -> Unit,
@@ -42,7 +43,7 @@ object Dru {
         if (bitmap == null) return
         val imageFile = getImageToString(bitmap)
         val call = Retrofit.Builder()
-            .baseUrl("http://172.20.10.2/image/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
@@ -73,7 +74,7 @@ object Dru {
     fun ImageView.loadImageCircle(url: String?) {
         Glide.with(this)
             .load(url)
-            .circleCrop()
+//            .circleCrop()
             .into(this)
     }
 
